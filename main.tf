@@ -8,12 +8,12 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-# Reference the existing shared training VPC
+
 data "aws_vpc" "training_vpc" {
   id = "vpc-0592cb2ddcc9797a5"
 }
 
-# Create and attach an Internet Gateway to the training VPC
+
 resource "aws_internet_gateway" "training_igw" {
   vpc_id = data.aws_vpc.training_vpc.id
 
@@ -22,7 +22,7 @@ resource "aws_internet_gateway" "training_igw" {
   }
 }
 
-# Create a new Public Subnet using an unused CIDR block inside 10.0.0.0/24
+
 resource "aws_subnet" "public_subnet" {
   vpc_id                  = data.aws_vpc.training_vpc.id
   cidr_block              = "10.0.0.128/28"
